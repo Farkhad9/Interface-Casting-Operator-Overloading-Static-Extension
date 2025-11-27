@@ -8,11 +8,16 @@ namespace Interface_Casting_Operator_Overloading_Static_Extension.Models
         public string Fullname
         {
             get { return _fullname; }
-            set 
+            set
             {
-                value.Split(' ');
-                 Fullname = value.Trim(); //TODO: fix later
+                
+               if (!CheckFullname(value))
+                   throw new ArgumentException("Fullname düzgün formatda deyil (Ad + Soyad, hər ikisi böyük hərflə başlamalıdır).");
+
+              _fullname = value;
+                
             }
+          
         }
         private string _GroupNo;
         public string GroupNo
@@ -23,40 +28,48 @@ namespace Interface_Casting_Operator_Overloading_Static_Extension.Models
             }
             set
             {
-                if (string.IsNullOrEmpty(value) || value.Length != 4)
-                {
-                    throw new ArgumentException("Göndərilən GroupNo ya boşdur, ya da uzunluğu 4-ə bərabər deyil.");
-                }
-
-                if (!char.IsUpper(value[0]))
-                {
-                    throw new ArgumentException("Göndərilən GroupNo-nun ilk hərfi böyük hərf deyil.");
-                }
-
-                // Rəqəmləri yoxla
-                for (int i = 1; i < 4; i++)
-                {
-                    if (!char.IsDigit(value[i]))
-                    {
-                        throw new ArgumentException("Göndərilən GroupNo-nun son 3 simvolu rəqəm olmalıdır.");
-                    }
-                }
-
-                int number = int.Parse(value.Substring(1, 3));
-                if (number < 1 || number > 999)
-                {
-                    throw new ArgumentException("GroupNo-nun rəqəm hissəsi 001-999 arasında olmalıdır.");
-                }
+                if (!CheckGroupNo(value))
+                    throw new ArgumentException("GroupNo düzgün deyil");
 
                 _GroupNo = value;
             }
 
         }
         public int Age { get; set; }
-        public Student()
+        public Student(string fullname,string groupno,int age)
         {
-           
+            Fullname = fullname;
+            GroupNo = groupno;
+            Age = age;
         }
 
+        public static bool CheckFullname(string fullname)
+        {
+            if (string.IsNullOrWhiteSpace(fullname)) return false;
+
+            string[] parts = fullname.Trim().Split(' ');
+
+            if (parts.Length != 2) return false;
+
+            return char.IsUpper(parts[0][0]) && char.IsUpper(parts[1][0]);
+        }
+
+        public static bool CheckGroupNo(string groupNo)
+        {
+            if (string.IsNullOrEmpty(groupNo) || groupNo.Length != 4)
+                return false;
+
+            if (!char.IsUpper(groupNo[0]))
+                return false;
+
+            for (int i = 1; i < 4; i++)
+            {
+                if (!char.IsDigit(groupNo[i]))
+                    return false;
+            }
+
+            return true;
+        }
     }
 }
+
