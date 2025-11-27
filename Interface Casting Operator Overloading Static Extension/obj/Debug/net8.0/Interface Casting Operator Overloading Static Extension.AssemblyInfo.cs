@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Interface Casting Operator Overloading Static Extension")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40778ac6af746138d6420d2ab6c45c72f7dbd0b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Interface Casting Operator Overloading Static Extension")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Interface Casting Operator Overloading Static Extension")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
